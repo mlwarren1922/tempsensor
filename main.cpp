@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "DBINTERFACE.h"
+#include <unistd.h>
 
 using namespace std;
 		
@@ -17,12 +18,18 @@ int main(int argc, char** argv){
 	string addr = "127.0.0.1";
 	string port = "5432";
 
+	double measurement = 1.2345;
 
 
 	DBINTERFACE *dbase = new DBINTERFACE(dbname,username,password,addr,port);
-	dbase->addMeasurement();
 	
-	//delete dbase;
+	while(1){
+		dbase->addMeasurementDB(measurement);
+		sleep(5);
+	}
+
+
+	delete dbase;
 
 	return 0;
 }

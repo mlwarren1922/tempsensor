@@ -27,7 +27,7 @@ protected:
 public:
 	DBINTERFACE(string dbname, string username, string password, string addr, string port);
 	virtual ~DBINTERFACE();
-	int addMeasurement();
+	int addMeasurementDB(double measurement);
 };
 
 #endif /* DBINTERFACE_H_ */

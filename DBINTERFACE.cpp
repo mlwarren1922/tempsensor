@@ -35,29 +35,29 @@ DBINTERFACE::~DBINTERFACE() {
 	delete conn;
 }
 
-int DBINTERFACE::addMeasurement(){
+int DBINTERFACE::addMeasurementDB(double measurement){
 	string sqlstatement;
-	int index;
-	double measurement;
-
-	index = 1;
-	measurement = 1.23;
 
 	//check database connection
 	if(!conn->is_open()){
-		cout << "Failed to open database..." << endl;
-		return 1;
+
+		//try to open connection to database
+		conn = new connection(this->databaseConnectString);
+		if(!conn->is_open()){
+			cout << "Unable to connect to database..." << endl;
+			return 1;
+		}
 	}
 
-	sqlstatement = "INSERT INTO temp (id,temperature) VALUES (" + to_string(index) + ", " + to_string(measurement) + ");";
+	sqlstatement = "INSERT INTO temp (date, temperature) VALUES (NOW(), " + to_string(measurement) + ");";
+	//sqlstatement = "INSERT INTO temp (date, temperature) VALUES (NOW(),1.2345);";
 
 	work W(*conn);
 
 	W.exec(sqlstatement.c_str());
 	W.commit();
 
-	cout << "Measurement recorded..." << endl;
-
 	return 0;
 }
+
 
