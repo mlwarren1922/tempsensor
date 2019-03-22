@@ -1,13 +1,15 @@
 CC = g++
 
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g 
 
-INCLUDES = -I/usr/include/libxml2
+INCLUDES = -I/usr/lib/x86_64-linux-gnu/ \
+		   -I/usr/include/postgresql
 
-LDFLAGS = -L/usr/local/lib
+LDFLAGS = 
 
 SRCS += \
-		main.cpp
+		DBINTERFACE.cpp \
+		main.cpp 
 		
 LIBS += \
 		
@@ -20,10 +22,10 @@ TARGET = tempsensor
 all:$(TARGET)
 
 $(TARGET):$(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(TARGET) $(OBJS) $(LFLAGS) $(LIBS) -lpqxx -lpq
 	
 .cpp.o:
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES) $(LDFLAGS) -c $< -o $@ -lpqxx -lpq
 	
 clean:
 	$(RM) *.o *~ $(TARGET)
