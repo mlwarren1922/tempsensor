@@ -50,7 +50,6 @@ int DBINTERFACE::addMeasurementDB(double measurement){
 	}
 
 	sqlstatement = "INSERT INTO temp (date, temperature) VALUES (NOW(), " + to_string(measurement) + ");";
-	//sqlstatement = "INSERT INTO temp (date, temperature) VALUES (NOW(),1.2345);";
 
 	work W(*conn);
 

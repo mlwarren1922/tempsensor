@@ -1,0 +1,2 @@
+﻿--truncate temp restart identity;
+select * from temp;

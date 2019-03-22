@@ -2,6 +2,7 @@
 #include <string>
 #include "DBINTERFACE.h"
 #include <unistd.h>
+#include "TEMPMEASUREMENT.h"
 
 using namespace std;
 		
@@ -22,14 +23,17 @@ int main(int argc, char** argv){
 
 
 	DBINTERFACE *dbase = new DBINTERFACE(dbname,username,password,addr,port);
+	TEMPMEASUREMENT *temp = new TEMPMEASUREMENT();
 	
 	while(1){
+		measurement = temp->getTempMeasurement();
 		dbase->addMeasurementDB(measurement);
-		sleep(5);
+		sleep(1);
 	}
 
 
 	delete dbase;
+	delete temp;
 
 	return 0;
 }
