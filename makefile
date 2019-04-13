@@ -10,6 +10,7 @@ LDFLAGS =
 SRCS += \
 		DBINTERFACE.cpp \
 		TEMPMEASUREMENT.cpp \
+		MCP9808.cpp \
 		main.cpp 
 		
 LIBS += \

@@ -11,14 +11,16 @@
 #define TEMPMEASUREMENT_H_
 
 #include <math.h>
+#include "MCP9808.h"
 
-#define TESTMODE
+//#define TESTMODE
 
 class TEMPMEASUREMENT {
 protected:
 	double testValues[100];
 	int testi;
 	double tempMeasurement;
+	MCP9808 *tempsensor1;
 public:
 	TEMPMEASUREMENT();
 	virtual ~TEMPMEASUREMENT();

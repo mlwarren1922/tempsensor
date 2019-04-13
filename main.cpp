@@ -3,6 +3,7 @@
 #include "DBINTERFACE.h"
 #include <unistd.h>
 #include "TEMPMEASUREMENT.h"
+#include "MCP9808.h"
 
 using namespace std;
 		
@@ -19,16 +20,18 @@ int main(int argc, char** argv){
 	string addr = "127.0.0.1";
 	string port = "5432";
 
+
 	double measurement = 1.2345;
 
 
 	DBINTERFACE *dbase = new DBINTERFACE(dbname,username,password,addr,port);
 	TEMPMEASUREMENT *temp = new TEMPMEASUREMENT();
-	
+
 	while(1){
 		measurement = temp->getTempMeasurement();
+		cout << "Temp: " << measurement << "f" << endl;
 		dbase->addMeasurementDB(measurement);
-		sleep(1);
+		sleep(600);
 	}
 
 

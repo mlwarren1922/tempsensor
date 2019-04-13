@@ -10,19 +10,18 @@
 using namespace std;
 
 TEMPMEASUREMENT::TEMPMEASUREMENT() {
-	cout << "Intializing temperature sensors..." << endl;
-#ifdef TESTMODE
-	cout << "Initializing test value table..." << endl;
-	this->createTestValues();
-	testi = 0;
-#endif
+	string filename = "/dev/i2c-1";
+	int tempsensor_addr = 0b0011000;
 
-	tempMeasurement = 0;
+	cout << "Intializing temperature sensors..." << endl;
+	this->tempMeasurement = 0;
+
+	this->tempsensor1 = new MCP9808(filename, tempsensor_addr);
 
 }
 
 TEMPMEASUREMENT::~TEMPMEASUREMENT() {
-	// TODO Auto-generated destructor stub
+	delete this->tempsensor1;
 }
 
 int TEMPMEASUREMENT::createTestValues(void){
@@ -37,14 +36,7 @@ int TEMPMEASUREMENT::createTestValues(void){
 }
 
 double TEMPMEASUREMENT::getTempMeasurement(){
-	//get temperature measurement
-#ifdef TESTMODE
-	tempMeasurement = this->testValues[testi];
-	cout << "Stored " << this->testValues[testi] << endl;
-	testi++;
-	if(testi == 100){
-		testi = 0;
-	}
-#endif
+	tempMeasurement = this->tempsensor1->getTemperature();
+	tempMeasurement = (tempMeasurement * 9/5) + 32;
 	return tempMeasurement;
 }
