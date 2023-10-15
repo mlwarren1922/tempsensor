@@ -16,7 +16,7 @@ int main(int argc, char** argv){
 	
 	string dbname = string(argv[1]);
 	string username = "postgres";
-	string password = "!peanut2";
+	string password = "@#$%$%!";
 	string addr = "127.0.0.1";
 	string port = "5432";
 
